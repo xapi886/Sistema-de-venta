@@ -4,12 +4,18 @@
  */
 package Vista;
 
+import Modelo.Cliente;
+import Modelo.ClienteDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xapi008
  */
 public class Sistema extends javax.swing.JFrame {
-
+    
+    Cliente cl = new Cliente();
+    ClienteDao client = new ClienteDao();
     /**
      * Creates new form Sistema
      */
@@ -207,7 +213,7 @@ public class Sistema extends javax.swing.JFrame {
         jLabel14.setText("Nombre:");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel15.setText("T'élefono:");
+        jLabel15.setText("Télefono:");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Dirección:");
@@ -233,6 +239,11 @@ public class Sistema extends javax.swing.JFrame {
         }
 
         btnGuardarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
+        btnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarClienteActionPerformed(evt);
+            }
+        });
 
         btnEliminarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
         btnEliminarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -248,7 +259,7 @@ public class Sistema extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -855,6 +866,22 @@ public class Sistema extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+        // TODO add your handling code here:
+        if(!"".equals(txtDniCliente.getText()) || !"".equals(txtNombreCliente.getText()) || 
+           !"".equals(txtTelefonoCliente.getText()) || !"".equals(txtDireccionCliente.getText())){
+            cl.setDni(Integer.parseInt(txtDniCliente.getText()));
+            cl.setNombre(txtNombreCliente.getText());
+            cl.setTelefono(Integer.parseInt(txtTelefonoCliente.getText()));
+            cl.setDireccion(txtDireccionCliente.getText());
+            cl.setRazon(txtRazonCliente.getText());
+            client.RegistrarCliente(cl);
+            JOptionPane.showMessageDialog(null,"Cliente Registrado");
+        }else{
+            JOptionPane.showMessageDialog(null,"Los campos estan vacios");
+        }
+    }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     /**
      * @param args the command line arguments
